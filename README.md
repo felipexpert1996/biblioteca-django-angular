@@ -1,0 +1,2 @@
+biblioteca-django-angular
+Projeto modelo para demonstrar a integração entre django rest framework e o angular, dentro dos arquivos backend e frontend existem documentações mais detalhadas a respeito das partes dos projeto
