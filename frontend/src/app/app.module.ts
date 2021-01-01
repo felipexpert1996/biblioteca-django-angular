@@ -1,5 +1,3 @@
-import { RegisterModule } from './register/register.module';
-import { LoginModule } from './login/login.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -28,8 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    LoginModule,
-    RegisterModule,
     HttpClientModule
   ],
   providers: [],
