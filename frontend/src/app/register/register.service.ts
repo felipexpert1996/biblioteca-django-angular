@@ -12,6 +12,6 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   register(user: User): Observable<any>{
-    return this.http.post(`${environment}/registration/`, user)
+    return this.http.post(`${environment.baseUrl}/account/registration/`, user)
   }
 }

@@ -1,1 +1,45 @@
-<p>login works!</p>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="loginForm" class="form-control">
+          <div>
+            <mat-form-field>
+              <input matInput type="text" value="" placeholder="Email" formControlName='email'>
+            </mat-form-field>
+            <mat-error *ngIf='loginForm.controls.email.hasError("required")'>
+              Email é obrigatório
+            </mat-error>
+            <mat-error *ngIf='loginForm.controls.email.hasError("minlength")'>
+              Email deve possuir mais de 5 caracters
+            </mat-error>
+            <mat-error *ngIf='loginForm.controls.email.hasError("email")'>
+              Email inválido
+            </mat-error>
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput type="password" value="" placeholder="Senha" formControlName='password'>
+            </mat-form-field>
+            <mat-error *ngIf='loginForm.controls.password.hasError("required")'>
+              Senha é obrigatório
+            </mat-error>
+            <mat-error *ngIf='loginForm.controls.password.hasError("minlength")'>
+              Senha deve possuir no mínimo 8 caracters
+            </mat-error>
+          </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)='submit()' [disabled]='!loginForm.valid'>
+          <mat-icon style="color: green;" id="btn-submit">check</mat-icon>Cadastrar
+      </button>
+      <button mat-button (click)='clear()'>
+        <mat-icon style="color: red;" id='btn-close'>close</mat-icon>Limpar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

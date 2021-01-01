@@ -1,0 +1,36 @@
+mat-card {
+  grid-area: card;
+}
+
+.container {
+  display: grid;
+}
+
+
+.container {
+  display: grid;
+  grid-template-rows: minmax(100px, 3fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+  '.      .          .'
+  '.      card       .'
+  '.      .          .';
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#btn-close {
+  justify-self: end;
+}
+
+#btn-submit {
+  justify-self: start;
+}
