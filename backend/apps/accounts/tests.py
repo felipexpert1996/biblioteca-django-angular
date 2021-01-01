@@ -45,3 +45,24 @@ class AccountsTest(APITestCase):
         token = Token.objects.get(user=user)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(f'{response.data["key"]}', f'{token}')
+
+    def test_logout(self):
+        fake = Faker()
+        fake.add_provider(internet)
+        fake.add_provider(misc)
+        name = fake.user_name()
+        email = fake.email()
+        password = fake.password(length=8)
+        user = User.objects.create_user(name, email, password)
+        data = {
+            'email': email,
+            'password': password
+        }
+        url = reverse('login')
+        self.client.post(url, data, format='json')
+        url = reverse('logout')
+        token = Token.objects.get(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {token}')
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Token.objects.filter(user=user).exists(), False)
