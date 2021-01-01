@@ -1,15 +1,37 @@
-from dj_rest_auth.views import LoginView, LogoutView
+from dj_rest_auth.registration.views import RegisterView
+from dj_rest_auth.views import LogoutView, LoginView
+
+
+class CustomRegisterView(RegisterView):
+    """
+    Register a new user, return an access token.
+
+    Accept the following POST parameters: username, email, password1, password2
+    Return the REST Framework Token Object's key.
+    """
+
+    
+class CustomLogoutView(LogoutView):
+    """
+    Calls Django logout method and delete the Token object
+    assigned to the current User object.
+    
+    Token must be sent in the request header.
+
+    Accepts/Returns nothing.
+    """
+
+    http_method_names = ["post"]
 
 
 class CustomLoginView(LoginView):
     """
-        Verifica as credenciais e retorne o token REST
-        se as credenciais são válidas e autenticadas.   
-        Chama o método de login do Django Auth para registrar o ID do usuário
-        no framework de sessão Django
+    Check the credentials and return the REST Token
+    if the credentials are valid and authenticated.
 
-        Aceita os seguintes parâmetros via POST: email e senha
-        Retorna a chave o Token do REST Framework.
+    Calls Django Auth login method to register User ID
+    in Django session framework.
+
+    Accept the following POST parameters: username, password
+    Return the REST Framework Token Object's key.
     """
-
-    

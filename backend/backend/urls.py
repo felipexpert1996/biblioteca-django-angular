@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from dj_rest_auth.views import LogoutView
-from apps.accounts.views import CustomLoginView
+from apps.accounts.views import CustomRegisterView, CustomLogoutView, CustomLoginView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -37,8 +37,8 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/login/', CustomLoginView.as_view(), name='login'),
-    path('account/logout/', LogoutView.as_view(), name='logout'),
-    path('account/registration/', include('dj_rest_auth.registration.urls')),
+    path('account/logout/', CustomLogoutView.as_view(), name='logout'),
+    path('account/registration/', CustomRegisterView.as_view()),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
