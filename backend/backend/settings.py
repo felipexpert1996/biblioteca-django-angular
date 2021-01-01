@@ -46,10 +46,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'drf_yasg',
-    'apps.accounts'
+    'apps.accounts',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -156,3 +158,7 @@ AUTHENTICATION_BACKENDS = [
 SWAGGER_SETTINGS = {
    'USE_SESSION_AUTH': False
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]
