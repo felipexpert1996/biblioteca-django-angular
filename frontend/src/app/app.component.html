@@ -1,17 +1,23 @@
 <div id="container">
   <mat-toolbar color='primary'>
     <mat-toolbar-row>
-      <button mat-icon-button>
-        <mat-icon (click)='sidenav.toggle()'>menu</mat-icon>
-      </button>
-      <h1>Biblioteca</h1>
+        <button mat-icon-button>
+          <mat-icon (click)='sidenav.toggle()'>menu</mat-icon>
+        </button>
+        <h1>Biblioteca</h1>
+        <div style="position: fixed; right: 10px;">
+          <button mat-icon-button *ngIf='!(authenticated$ | async)' [routerLink]="'/accounts/login'"><mat-icon>login</mat-icon></button>
+          <button mat-icon-button *ngIf='(authenticated$ | async)' (click)='logout()'><mat-icon>logout</mat-icon></button>
+        </div>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
       <mat-list (click)='sidenav.close()'>
-        <a mat-list-item [routerLink]="'/accounts/login'">Login</a>
-        <a mat-list-item [routerLink]="'/accounts/register'">Register</a>
+        <ng-container *ngIf='!(authenticated$ |async)'>
+        </ng-container>
+        <ng-container *ngIf="(authenticated$ |async)">
+        </ng-container>
       </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>

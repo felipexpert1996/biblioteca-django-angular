@@ -1,4 +1,5 @@
-import { RegisterService } from './register.service';
+import { AuthService } from './../auth.service';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private registerService: RegisterService,
+    private registerService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router) { }
 

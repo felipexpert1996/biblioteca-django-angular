@@ -21,12 +21,12 @@
           </div>
           <div>
             <mat-form-field>
-              <input matInput type="password" value="" placeholder="Senha" formControlName='password'>
+              <input matInput type="password" value="" placeholder="Senha" formControlName='password1'>
             </mat-form-field>
-            <mat-error *ngIf='loginForm.controls.password.hasError("required")'>
+            <mat-error *ngIf='loginForm.controls.password1.hasError("required")'>
               Senha é obrigatório
             </mat-error>
-            <mat-error *ngIf='loginForm.controls.password.hasError("minlength")'>
+            <mat-error *ngIf='loginForm.controls.password1.hasError("minlength")'>
               Senha deve possuir no mínimo 8 caracters
             </mat-error>
           </div>
@@ -34,7 +34,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)='submit()' [disabled]='!loginForm.valid'>
-          <mat-icon style="color: green;" id="btn-submit">check</mat-icon>Cadastrar
+          <mat-icon style="color: green;" id="btn-submit">check</mat-icon>Login
       </button>
       <button mat-button (click)='clear()'>
         <mat-icon style="color: red;" id='btn-close'>close</mat-icon>Limpar

@@ -1,5 +1,8 @@
 from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LogoutView, LoginView
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 
 class CustomRegisterView(RegisterView):
@@ -35,3 +38,20 @@ class CustomLoginView(LoginView):
     Accept the following POST parameters: username, password
     Return the REST Framework Token Object's key.
     """
+
+class VerifyToken(RetrieveAPIView):
+    """
+    Checks if the token is valid and returns a boolean.
+
+    Checks the existence of the token in the database.
+
+    Receives a query string with user email
+    """
+
+    def get(self, request):
+        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+        email = request.query_params.get("email")
+        if (token and email):
+            return Response({'valid':Token.objects.filter(key=token, user__email=email).exists()})
+        else:
+            return Response({'valid':False})

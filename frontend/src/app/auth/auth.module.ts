@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { AuthInterceptor } from './auth.interceptor';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -8,17 +9,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { AccountsRoutingModule } from './accounts-routing.module';
+import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+
 @NgModule({
-  declarations: [
-    LoginComponent, RegisterComponent
-  ],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
-    AccountsRoutingModule,
+    AuthRoutingModule,
     CommonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -29,4 +29,13 @@ import { RegisterComponent } from './register/register.component';
     MatSnackBarModule
   ]
 })
-export class AccountsModule { }
+export class AuthModule {
+  static forRoot(): ModuleWithProviders<any> {
+    return {
+      ngModule: AuthModule,
+      providers: [
+        AuthInterceptor
+      ]
+    }
+  }
+}
