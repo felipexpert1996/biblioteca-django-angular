@@ -10,6 +10,16 @@ from rest_framework.authtoken.models import Token
 class AccountsTest(APITestCase):
     client = APIClient()
 
+    @staticmethod
+    def get_user():
+        fake = Faker()
+        fake.add_provider(internet)
+        fake.add_provider(misc)
+        name = fake.user_name()
+        email = fake.email()
+        password = fake.password(length=8)
+        return User.objects.create_user(name, email, password), password
+
     def test_register(self):
         url = reverse('register')
         fake = Faker()
@@ -24,21 +34,14 @@ class AccountsTest(APITestCase):
             'password1': password,
             'password2': password
         }
-
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_login(self):
         url = reverse('login')
-        fake = Faker()
-        fake.add_provider(internet)
-        fake.add_provider(misc)
-        name = fake.user_name()
-        email = fake.email()
-        password = fake.password(length=8)
-        user = User.objects.create_user(name, email, password)
+        user, password = self.get_user()
         data = {
-            'email': email,
+            'email': user.email,
             'password': password
         }
         response = self.client.post(url, data, format='json')
@@ -47,15 +50,9 @@ class AccountsTest(APITestCase):
         self.assertEqual(f'{response.data["key"]}', f'{token}')
 
     def test_logout(self):
-        fake = Faker()
-        fake.add_provider(internet)
-        fake.add_provider(misc)
-        name = fake.user_name()
-        email = fake.email()
-        password = fake.password(length=8)
-        user = User.objects.create_user(name, email, password)
+        user, password = self.get_user()
         data = {
-            'email': email,
+            'email': user.email,
             'password': password
         }
         url = reverse('login')
