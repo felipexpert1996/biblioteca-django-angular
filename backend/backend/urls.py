@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from apps.accounts.views import CustomRegisterView, CustomLogoutView, CustomLoginView, VerifyToken
+from apps.author.views import AuthorViewset
 from apps.category.views import CategoryViewset
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -24,6 +25,7 @@ from rest_framework import routers
 
 router = routers.SimpleRouter()
 router.register('categories', CategoryViewset)
+router.register('authors', AuthorViewset)
 
 
 schema_view = get_schema_view(
@@ -47,5 +49,5 @@ urlpatterns = [
     path('account/verify/', VerifyToken.as_view(), name='verify-token'),
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
