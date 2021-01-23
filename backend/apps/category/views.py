@@ -12,9 +12,11 @@ class CategoryViewset(ModelViewSet):
             None
 
         Returns:
-            {
-                "description": "exemplo"
-            }
+            [
+                {
+                    "description": "exemplo"
+                }
+            ]
     """
 
     serializer_class = CategorySerializer
